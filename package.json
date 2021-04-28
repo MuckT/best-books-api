@@ -1,0 +1,34 @@
+{
+  "name": "best-books-api",
+  "version": "1.0.0",
+  "description": "A server for the best books app",
+  "main": "index.js",
+  "scripts": {
+    "test:open": "./node_modules/.bin/cypress open",
+    "test:run": "./node_modules/.bin/cypress run --headless --browser=chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuckT/best-books-api.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "MuckT & Mmarcos01",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MuckT/best-books-api/issues"
+  },
+  "homepage": "https://github.com/MuckT/best-books-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.6",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "cypress": "^7.2.0",
+    "eslint-plugin-cypress": "^2.11.2"
+  }
+}
