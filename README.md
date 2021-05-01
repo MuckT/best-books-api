@@ -33,6 +33,8 @@
 | Time | Feature |
 | ---- | ---- |
 |04-27-2021 9:00 PST | Initialize Repository |
+|04-28-2021 9:00pm PST | Integrate Mongoose, Create User and Book Schema |
+|04-28-2021 10:00pm PST | Connect to Front-End: Implement Feature: BestBooks - Book Tracking |
 
 ## Team Agreement
 
