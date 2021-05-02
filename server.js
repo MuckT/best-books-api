@@ -32,10 +32,10 @@ const myUser = new User({
   ]
 });
 
-myUser.save(function (err) {
-  if (err) console.log(err);
-  else console.log('saved the user');
-});
+// myUser.save(function (err) {
+//   if (err) console.log(err);
+//   else console.log('saved the user');
+// });
 
 // Cors Fix
 app.use(cors());
@@ -60,7 +60,7 @@ app.post('/books', (req, res) => {
       let user = databaseResults[0];
       console.log(user.books);
       req.body.books.forEach(item => {
-        if (typeof(item.name) === 'string' && typeof(item.description) === 'string' && typeof(item.status) === 'boolean') {
+        if (typeof (item.name) === 'string' && typeof (item.description) === 'string' && typeof (item.status) === 'boolean') {
           user.books.push(item);
         } else {
           console.log('invalid entry');
@@ -73,6 +73,18 @@ app.post('/books', (req, res) => {
         res.send(databaseResults.books);
       });
     }
+  });
+});
+
+app.delete('/books/:id', (req, res) => {
+  console.log('delete called');
+  let email = req.query.email;
+  User.find({ email: email }, (err, userData) => {
+    let user = userData[0];
+    user.books = user.books.filter(book => book._id.toString() !== req.params.id);
+    user.save().then(userData => {
+      res.send(userData.books);
+    });
   });
 });
 
