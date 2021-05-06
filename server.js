@@ -76,6 +76,24 @@ app.post('/books', (req, res) => {
   });
 });
 
+app.put('/books/:id', (req, res) => {
+  let email = req.query.email;
+  User.find({ email: email }, (err, userData) => {
+    let user = userData[0];
+    let bookId = req.params.id;
+    user.books.forEach(book => {
+      if (`${book._id}` === bookId) {
+        book.name = req.body.name;
+        book.description = req.body.description;
+        book.status = req.body.status;
+      }
+    });
+    user.save().then(userData => {
+      res.send(userData.books);
+    });
+  });
+});
+
 app.delete('/books/:id', (req, res) => {
   console.log('delete called');
   let email = req.query.email;
