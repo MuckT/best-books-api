@@ -58,7 +58,6 @@ app.post('/books', (req, res) => {
       res.status(400).send('error: user does not exist');
     } else {
       let user = databaseResults[0];
-      console.log(user.books);
       req.body.books.forEach(item => {
         if (typeof (item.name) === 'string' && typeof (item.description) === 'string' && typeof (item.status) === 'boolean') {
           user.books.push(item);
@@ -66,10 +65,7 @@ app.post('/books', (req, res) => {
           console.log('invalid entry');
         }
       });
-      // user.books.push(req.body.books);
-      console.log(user.books);
       user.save().then((databaseResults) => {
-        console.log(databaseResults);
         res.send(databaseResults.books);
       });
     }
@@ -77,18 +73,18 @@ app.post('/books', (req, res) => {
 });
 
 app.put('/books/:id', (req, res) => {
-  let email = req.query.email;
-  User.find({ email: email }, (err, userData) => {
-    let user = userData[0];
+  User.find({ email: req.body.email }, (err, databaseResults) => {
+    let user = databaseResults[0];
     let bookId = req.params.id;
-    user.books.forEach(book => {
-      if (`${book._id}` === bookId) {
-        book.name = req.body.name;
-        book.description = req.body.description;
-        book.status = req.body.status;
+    user.books.forEach((book, index) => {
+      if (book._id.toString() === bookId) {
+        book.name = req.body.books[0].name;
+        book.description = req.body.books[0].description;
+        book.status = req.body.books[0].status;
       }
     });
     user.save().then(userData => {
+      console.log(userData);
       res.send(userData.books);
     });
   });
